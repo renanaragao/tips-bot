@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "tips_bot": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
