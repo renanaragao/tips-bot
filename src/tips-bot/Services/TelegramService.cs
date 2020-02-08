@@ -37,7 +37,7 @@ namespace tips_bot.Services
             return result.Result;
         }
 
-        public async Task SendMessage(Message message)
+        public async Task SendMessageAsync(Message message)
         {
             await host.AppendPathSegment($"{token}/sendMessage")
                 .SetQueryParam("chat_id", message.Id)

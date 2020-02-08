@@ -86,7 +86,7 @@ namespace tips_bot.tests.Services
 
             httpTest.RespondWithJson(resultTelegram);
 
-            await service.SendMessage(message);
+            await service.SendMessageAsync(message);
 
             httpTest.ShouldHaveCalled($"{host}/{token}/sendMessage")
                 .WithVerb(HttpMethod.Get)
