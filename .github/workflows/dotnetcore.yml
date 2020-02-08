@@ -14,6 +14,6 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build src/tips-bot.sln --configuration Release
     - name: tests
-      run: dotnet test
+      run: dotnet test src/tips-bot.sln
