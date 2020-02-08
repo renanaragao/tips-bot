@@ -1,3 +1,5 @@
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace tips_bot.Models
 {
     public class User
@@ -14,6 +16,7 @@ namespace tips_bot.Models
             LastName = lastName;
         }
 
+        [BsonId]
         public int Id { get; private set; }
         public string Username { get; private set; }
         public string FirstName { get; private set; }
