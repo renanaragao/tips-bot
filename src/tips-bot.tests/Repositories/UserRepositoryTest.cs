@@ -39,7 +39,7 @@ namespace tips_bot.tests.Repositories
                     lastName: fixture.Create<string>()
                 );
 
-                await repository.Insert(user);
+                await repository.InsertAsync(user);
 
                 var found = await collection.Find(x => x.Id == user.Id).FirstOrDefaultAsync();
 

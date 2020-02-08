@@ -3,9 +3,8 @@ using tips_bot.Models;
 
 namespace tips_bot.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserService
     {
          Task InsertAsync(User user);
-        Task<User> GetAsync(int id);
     }
 }
