@@ -13,7 +13,13 @@ namespace tips_bot.Repository
         {
             collection = dataBase.GetCollection<User>(nameof(User));
         }
-        public async Task Insert(User user) 
+
+        public Task<User> GetAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task InsertAsync(User user) 
         => await collection.InsertOneAsync(user);
     }
 }
