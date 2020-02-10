@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using AutoFixture;
 using CompareObject;
@@ -15,6 +14,7 @@ namespace tips_bot.tests.Repositories
         private readonly IUserRepository repository;
         private readonly Fixture fixture;
         private User user;
+        private User otherUser;
         private readonly IMongoCollection<User> collection;
 
         // private readonly MongoCollectio
@@ -45,6 +45,91 @@ namespace tips_bot.tests.Repositories
 
                 Assert.Equal(user.FirstName, found.FirstName);
                 Assert.True(user.Compare(found));
+            }
+            finally
+            {
+                await DeleteAll();
+            }
+        }
+
+        [Fact]
+        public async Task Should_Not_Insert_User_If_Is_Null()
+        {
+            try
+            {
+                user = new User
+                (
+                    id: fixture.Create<int>(),
+                    username: fixture.Create<string>(),
+                    firstName: fixture.Create<string>(),
+                    lastName: fixture.Create<string>()
+                );
+
+                await repository.InsertAsync(user);
+
+                var found = await collection.Find(x => x.Id == user.Id).FirstOrDefaultAsync();
+
+                Assert.Equal(user.FirstName, found.FirstName);
+                Assert.True(user.Compare(found));
+            }
+            finally
+            {
+                await DeleteAll();
+            }
+        } 
+
+        [Fact]
+        public async Task Should_Get_User_By_Id()
+        {
+            try
+            {
+                user = new User
+                (
+                    id: fixture.Create<int>(),
+                    username: fixture.Create<string>(),
+                    firstName: fixture.Create<string>(),
+                    lastName: fixture.Create<string>()
+                );
+
+                await repository.InsertAsync(user);
+
+                var userResult = await repository.GetAsync(user.Id);
+
+                Assert.Equal(userResult.Id, user.Id);
+                Assert.True(user.Compare(userResult));
+            }
+            finally
+            {
+                await DeleteAll();
+            }
+        }
+
+        [Fact]
+        public async Task Should_NotGet_User_By_Id_And_Return_Null()
+        {
+            try
+            {
+                user = new User
+                (
+                    id: fixture.Create<int>(),
+                    username: fixture.Create<string>(),
+                    firstName: fixture.Create<string>(),
+                    lastName: fixture.Create<string>()
+                );
+
+                otherUser = new User
+                (
+                    id: fixture.Create<int>(),
+                    username: fixture.Create<string>(),
+                    firstName: fixture.Create<string>(),
+                    lastName: fixture.Create<string>()
+                );
+
+                await repository.InsertAsync(user);
+
+                var userResult = await repository.GetAsync(otherUser.Id);
+
+                Assert.Null(userResult);
             }
             finally
             {
