@@ -7,6 +7,5 @@ namespace tips_bot.Interfaces
     public interface ITelegramService
     {
          Task<IEnumerable<Update>> GetUpdatesAsync();
-         Task SendMessageAsync(Message message);
     }
 }

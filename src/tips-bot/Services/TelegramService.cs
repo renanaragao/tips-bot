@@ -37,14 +37,6 @@ namespace tips_bot.Services
             return result.Result;
         }
 
-        public async Task SendMessageAsync(Message message)
-        {
-            await host.AppendPathSegment($"{token}/sendMessage")
-                .SetQueryParam("chat_id", message.Id)
-                .SetQueryParam("text", message.Text)
-                .GetAsync();
-        }
-
         public struct ResultTelegram
         {
             public IEnumerable<Update> Result { get; set; }
