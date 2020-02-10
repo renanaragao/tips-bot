@@ -78,24 +78,6 @@ namespace tips_bot.tests.Services
                 .Times(1);
         }
 
-        [Fact]
-        public async Task Should_Send_Message()
-        {
-            var user = new User(0, "username", "firstName", "lastName");
-            var message = new Message(0, user, 0, "text");
-
-            httpTest.RespondWithJson(resultTelegram);
-
-            await service.SendMessageAsync(message);
-
-            httpTest.ShouldHaveCalled($"{host}/{token}/sendMessage")
-                .WithVerb(HttpMethod.Get)
-                .WithQueryParamValue("chat_id", message.Id)
-                .WithQueryParamValue("text", message.Text)
-                .Times(1);
-        }
-
-
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)

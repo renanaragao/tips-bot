@@ -5,7 +5,6 @@ namespace tips_bot.Interfaces
 {
     public interface IUserRepository
     {
-         Task InsertAsync(User user);
-        Task<User> GetAsync(int id);
+         Task Insert(User user);
     }
 }
